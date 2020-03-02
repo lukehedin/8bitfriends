@@ -17,7 +17,10 @@ const SEARCH_USERS = gql`
 						login,
 						name,
 						avatarUrl,
-						location
+						repositories {
+							__typename,
+							totalCount
+						}
 					}
 				}
 			}
@@ -28,17 +31,16 @@ const SEARCH_USERS = gql`
 function DiscoverPanelResults(props) {
 	const { loading, error, data } = useQuery(SEARCH_USERS, {
 		variables: {
-			searchValue: props.searchValue
+			searchValue: `${props.searchValue} type:user`
 		}
 	});
   
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <p>Fetching friends matching "{props.searchValue}"...</p>;
 	if (error) return <p>Error :(</p>;
   
 	return <div className="discover-panel-results">
 		{data && data.search && data.search.edges && data.search.edges.length > 0
 			? data.search.edges
-				.filter(edge => edge.node && edge.node.__typename === 'User')
 				.map(edge => {
 					let user = edge.node;
 					return <Link key={user.login} to={Util.route.user(user.login)} className="result">
@@ -46,7 +48,7 @@ function DiscoverPanelResults(props) {
 						<div className="user-details">
 							<p><b>{user.login}</b></p>
 							<p>{user.name}</p>
-							<p>{user.location}</p>
+							<p>{user.repositories.totalCount} repositor{user.repositories.length === 1 ? 'y' : 'ies'}</p>
 						</div>
 					</Link>;
 				})
