@@ -26,8 +26,8 @@ function UserInfoPanel(props) {
   
 	return <div className="user-info-panel">
 		<h3>{data.user.login}</h3>
-		{data.user.avatarUrl ? <img className="user-avatar" src={data.user.avatarUrl} /> : null}
-		<p>{data.user.name}</p>
+		{data.user.avatarUrl ? <img alt="User avatar" className="user-avatar" src={data.user.avatarUrl} /> : null}
+		<p className="user-name">{data.user.name}</p>
 		<p>{data.user.location}</p>
 	</div>;
 }

@@ -1,34 +1,17 @@
+import ApolloClient from 'apollo-boost';
+
 // Util contains common functions which will be used throughout the frontend
 const Util = {
-	api: {
-		_fetch: (method, endpoint, params) => {
-			return new Promise((resolve, reject) => {
-				fetch(`${endpoint}`, {
-					headers : { 
-						'Content-Type': 'application/json',
-						'Accept': 'application/json'
-					},
-					method: method,
-					body: params ? JSON.stringify(params) : null
-				})
-				.then(response => {
-					response.json().then(data =>  resolve(data));
-				})
-				.catch(err => {
-					console.log(err);
-					if(err.response && err.response.status === 401) {
-						reject(err);
-					}
-				});
+	apollo: {
+		TEST_FETCH_TIME: 5000,
+		
+		getClient() {
+			return new ApolloClient({
+				uri: 'https://api.github.com/graphql',
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('GITHUB_API_KEY')}`
+				}
 			});
-		},
-
-		get: (endpoint) => {
-			return Util.api._fetch('GET', endpoint);
-		},
-
-		post: (endpoint, params) => {
-			return Util.api._fetch('POST', endpoint, params);
 		}
 	},
 

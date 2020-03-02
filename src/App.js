@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Util from './Util';
 import './App.css';
@@ -11,17 +10,10 @@ import LoginPage from './components/pages/LoginPage';
 import DiscoverPage from './components/pages/DiscoverPage';
 import UserPage from './components/pages/UserPage';
 
-const client = new ApolloClient({
-	uri: 'https://api.github.com/graphql',
-	headers: {
-		'Authorization': `Bearer ${localStorage.getItem('GITHUB_API_KEY')}`
-	}
-});
-
 function App() {
   return (
 	<Router>
-		<ApolloProvider client={client}>
+		<ApolloProvider client={Util.apollo.getClient()}>
    		   <div className="app">
 				<AppHeader />
 				<div className="app-body">
