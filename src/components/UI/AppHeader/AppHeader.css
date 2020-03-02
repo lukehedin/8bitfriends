@@ -1,0 +1,23 @@
+.app-header {
+	background-color: #111;
+	padding: 8px;
+	color: white;
+}
+
+.app-header .app-header-inner {
+	max-width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.app-header .user-info p {
+	margin: 0;
+}
+
+.app-header .app-logo {
+	height: 32px;
+	display: block;
+}

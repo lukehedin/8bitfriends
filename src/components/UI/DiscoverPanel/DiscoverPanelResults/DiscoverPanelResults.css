@@ -1,0 +1,12 @@
+.discover-panel-results .result {
+	display: block;
+	background-color: #dda5de;
+	padding: 4px;
+	margin: 4px auto;
+	width: 200px;
+	text-decoration: none;
+}
+
+.discover-panel-results .result:hover {
+	background-color: #e18ee3;
+}
