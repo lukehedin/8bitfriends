@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Util from '../../../Util';
 import './AppHeader.css';
 
-import logo from './logo.png';
+import logo from '../../../logo.png';
 
 export default class AppHeader extends Component {
 	render() {
